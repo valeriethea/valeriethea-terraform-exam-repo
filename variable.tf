@@ -5,4 +5,7 @@ variable "public_key" {}
 variable "region" {
   default = "ap-southeast-1"
 }
+variable "common_tags" {
+  default = {}
+}
 variable "environment_tag" {}

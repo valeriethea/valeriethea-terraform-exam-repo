@@ -41,8 +41,10 @@ jobs:
         env:
           AWS_ACCESS: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
-          terraform plan -var-file=dev/dev.auto.tfvars -var="aws_secret_key=$AWS_SECRET" -var="aws_access_key=$AWS_ACCESS"
+          terraform plan -var-file=dev/dev.auto.tfvars -var="aws_secret_key=$AWS_SECRET" -var="aws_access_key=$AWS_ACCESS" -var="db_username=$DB_USERNAME" -var="db_password=$DB_PASSWORD" 
 
         # On push to main, build or change infrastructure according to Terraform configuration files
         # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
@@ -50,14 +52,18 @@ jobs:
         env:
           AWS_ACCESS: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          terraform apply -auto-approve -var-file=dev/dev.auto.tfvars -var="aws_secret_key=$AWS_SECRET" -var="aws_access_key=$AWS_ACCESS"
+          terraform apply -auto-approve -var-file=dev/dev.auto.tfvars -var="aws_secret_key=$AWS_SECRET" -var="aws_access_key=$AWS_ACCESS" -var="db_username=$DB_USERNAME" -var="db_password=$DB_PASSWORD"
 
       - name: Terraform Destroy
         env:
           AWS_ACCESS: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          terraform destroy -auto-approve -var-file=dev/dev.auto.tfvars -var="aws_secret_key=$AWS_SECRET" -var="aws_access_key=$AWS_ACCESS"
+          terraform destroy -auto-approve -var-file=dev/dev.auto.tfvars -var="aws_secret_key=$AWS_SECRET" -var="aws_access_key=$AWS_ACCESS" -var="db_username=$DB_USERNAME" -var="db_password=$DB_PASSWORD"

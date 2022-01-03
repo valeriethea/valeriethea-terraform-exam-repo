@@ -10,8 +10,8 @@ module "db" {
   allocated_storage = 5
 
   name     = "demodb"
-  username = var.username
-  password = var.password
+  username = var.db_username
+  password = var.db_password
   port     = "3306"
 
   iam_database_authentication_enabled = true

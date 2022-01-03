@@ -10,3 +10,5 @@ variable "ssh_key_pair" {
   description = "SSH key pair to be provisioned on the instance"
   default     = null
 }
+variable "username" {}
+variable "password" {}

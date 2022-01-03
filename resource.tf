@@ -43,7 +43,7 @@ resource "aws_lb" "test" {
   security_groups    = [module.web_server_sg.security_group_id]
   subnets            = [module.vpc.private_subnets[0], module.vpc.public_subnets[1]]
 
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
   tags = {
     Environment = "dev"

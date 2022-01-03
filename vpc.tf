@@ -5,11 +5,14 @@ module "vpc" {
   name = "vpc-demo"
   cidr = "10.0.0.0/16"
 
-  azs             = ["ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"]
-  private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
-  public_subnets  = ["10.0.10.0/24", "10.0.20.0/24", "10.0.30.0/24"]
+  azs              = ["ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"]
+  private_subnets  = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+  public_subnets   = ["10.0.10.0/24", "10.0.20.0/24", "10.0.30.0/24"]
+  database_subnets = ["10.0.100.0/24", "10.0.200.0/24"]
 
-  create_igw = false
+  create_igw                   = false
+  create_database_subnet_group = true
+  enable_dns_hostnames         = true
 
   tags = {
     Terraform   = "true"

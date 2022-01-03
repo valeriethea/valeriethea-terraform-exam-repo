@@ -39,8 +39,10 @@ module "db" {
 
   # Disable creation of option group - provide an option group or default AWS default
   create_db_option_group = false
+
   create_db_parameter_group = false
-  skip_final_snapshot = true
+
+  skip_final_snapshot = false
 
   parameters = [
     {
@@ -52,5 +54,4 @@ module "db" {
       value = "utf8mb4"
     }
   ]
-
 }

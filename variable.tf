@@ -5,3 +5,8 @@ variable "public_key" {}
 variable "region" {
   default = "ap-southeast-1"
 }
+variable "ssh_key_pair" {
+  type        = string
+  description = "SSH key pair to be provisioned on the instance"
+  default     = null
+}

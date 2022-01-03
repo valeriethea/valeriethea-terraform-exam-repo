@@ -37,6 +37,11 @@ module "db" {
   # Database Deletion Protection
   deletion_protection = false
 
+  # Disable creation of option group - provide an option group or default AWS default
+  create_db_option_group = false
+  create_db_parameter_group = false
+  skip_final_snapshot = true
+
   parameters = [
     {
       name  = "character_set_client"

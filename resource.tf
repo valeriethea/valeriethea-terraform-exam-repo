@@ -2,6 +2,7 @@ resource "aws_key_pair" "demo" {
   key_name   = var.key_name
   public_key = var.public_key
 }
+
 #Creating EC2 Instance
 resource "aws_instance" "ec2-demo" {
   vpc_security_group_ids = [module.web_server_sg.security_group_id]
@@ -12,7 +13,7 @@ resource "aws_instance" "ec2-demo" {
 
   tags = {
     Environment = "dev"
-    Name        = "Demo Sample 1"
+    Name        = "Demo-Sample-1"
   }
 }
 #IGW
@@ -27,13 +28,6 @@ resource "aws_route_table" "rtb" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw.id
   }
-}
-#Instance
-resource "aws_connect_instance" "test-demo" {
-  identity_management_type = "CONNECT_MANAGED"
-  inbound_calls_enabled    = true
-  instance_alias           = "test-demo-sample"
-  outbound_calls_enabled   = true
 }
 #Creating ALB
 resource "aws_lb" "test" {

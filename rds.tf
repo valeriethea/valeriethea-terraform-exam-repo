@@ -26,8 +26,8 @@ module "db" {
   }
 
   # DB subnet group
-  subnet_ids = module.vpc.database_subnets
-
+  subnet_ids = module.vpc.database_subnets 
+    
   # DB parameter group
   family = "mysql5.7"
 
@@ -35,15 +35,32 @@ module "db" {
   major_engine_version = "5.7"
 
   # Database Deletion Protection
-  deletion_protection = false
+  deletion_protection = true #false
 
   # Disable creation of option group - provide an option group or default AWS default
   create_db_option_group = false
-
+  
+  #RECENTLY ADDED = SEP 19, 2022
+  # Disable creation of RDS instance
+  create_db_instance = false
+    
+  #Disable creation of option group
+  create_db_option_group = false
+    
+  #Disable creation of parameter group
   create_db_parameter_group = false
+    
+  #Disable creation of subnet group
+  create_db_subnet_group = false
 
+  #Disable creation database
+  create_db = true
+  -----
+  
+  #Disable Final Snapshot 
   skip_final_snapshot = false
 
+  #Parameters character set for client
   parameters = [
     {
       name  = "character_set_client"
